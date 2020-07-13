@@ -8,5 +8,4 @@ module.exports = {
     '^.+\\.[jt]sx?$': 'ts-jest',
     '^.+\\.svg$': '<rootDir>/svgTransform.js',
   },
-  testTimeout: 1000 * 60 * 5,
 };

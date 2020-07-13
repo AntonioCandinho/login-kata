@@ -1,0 +1,47 @@
+import { fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
+import * as React from 'react';
+import { Login } from '../../../src/login/components/Login';
+import { LoginUseCase } from '../../../src/login/usecases/LoginUseCase';
+
+describe('Login component', () => {
+  const randomUsername = `any-username-${Math.random()}`;
+  const randomPassword = `any-password-${Math.random()}`;
+
+  let loginUseCase: LoginUseCase & { login: jest.Mock<Promise<void>, [string, string]> };
+  let onLogIn: jest.Mock<void>;
+  let loginComponent: RenderResult;
+
+  beforeEach(() => {
+    onLogIn = jest.fn();
+    loginUseCase = { login: jest.fn() };
+    loginComponent = render(<Login loginUseCase={loginUseCase} onLogIn={onLogIn} />);
+  });
+
+  const login = (username: string, password: string) => {
+    fireEvent.change(loginComponent.getByTestId('login-username'), {
+      target: { value: username },
+    });
+    fireEvent.change(loginComponent.getByTestId('login-password'), {
+      target: { value: password },
+    });
+    fireEvent.click(loginComponent.getByTestId('login-submit'));
+  };
+
+  it('should call login use case with username and password', () => {
+    login(randomUsername, randomPassword);
+    expect(loginUseCase.login).toBeCalledWith(randomUsername, randomPassword);
+  });
+
+  it('should call onLogIn call back on succesfull login', async () => {
+    login(randomUsername, randomPassword);
+    await waitFor(() => expect(onLogIn).toHaveBeenCalled());
+  });
+
+  it('with no user or password should print and error', async () => {
+    login('', '');
+    await waitFor(() => {
+      const loginError = loginComponent.getByTestId('login-error');
+      expect(loginError.textContent).not.toEqual('');
+    });
+  });
+});

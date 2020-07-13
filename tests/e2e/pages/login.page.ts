@@ -1,11 +1,11 @@
 import { ConfigLoader } from '../config/config-loader';
 import { WebDriverWrapper } from '../selenium/web-driver.wrapper';
-import { By, WebElement } from 'selenium-webdriver';
+import { By } from 'selenium-webdriver';
 
 export class LoginPage {
-  public static readonly USERNAME_SELECTOR = 'input[name=username]';
-  public static readonly PASSWORD_SELECTOR = 'input[name=password]';
-  public static readonly SUBMIT_SELECTOR = 'input[name=submit-login]';
+  public static readonly USERNAME_SELECTOR = '[data-testid=login-username]';
+  public static readonly PASSWORD_SELECTOR = '[data-testid=login-password]';
+  public static readonly SUBMIT_SELECTOR = '[data-testid=login-submit]';
 
   constructor(private driver: WebDriverWrapper) {}
 
