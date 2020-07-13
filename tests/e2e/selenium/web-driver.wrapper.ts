@@ -14,6 +14,7 @@ export class WebDriverWrapper {
       querySelectorAll: this.querySelectorAll.bind(this),
       clearSessionStorage: this.clearSessionStorage.bind(this),
       clearLocalStorage: this.clearLocalStorage.bind(this),
+      isVisible: this.isVisible.bind(this),
     });
   }
 
@@ -22,6 +23,11 @@ export class WebDriverWrapper {
     message?: string
   ): Promise<T> {
     return this.driver.wait(condition, WebDriverWrapper.WAIT_UNTIL_TIME, message);
+  }
+
+  async isVisible(selector: string | Locator): Promise<boolean> {
+    const element = await this.waitTimeout(until.elementLocated(locate(selector)));
+    return element.isDisplayed();
   }
 
   async querySelector(selector: string | Locator): Promise<WebElement> {
