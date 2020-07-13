@@ -37,8 +37,17 @@ describe('Login component', () => {
     await waitFor(() => expect(onLogIn).toHaveBeenCalled());
   });
 
-  it('with no user or password should print and error', async () => {
+  it('with no user or password should print an error', async () => {
     login('', '');
+    await waitFor(() => {
+      const loginError = loginComponent.getByTestId('login-error');
+      expect(loginError.textContent).not.toEqual('');
+    });
+  });
+
+  it('if use case fails should print an error', async () => {
+    loginUseCase.login.mockRejectedValue(Error('Some error'));
+    login(randomUsername, randomPassword);
     await waitFor(() => {
       const loginError = loginComponent.getByTestId('login-error');
       expect(loginError.textContent).not.toEqual('');

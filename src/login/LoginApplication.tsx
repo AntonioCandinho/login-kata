@@ -7,7 +7,7 @@ export class LoginApplication {
   public constructor(private loginUseCase: LoginUseCase) {}
 
   public static createDefault(): LoginApplication {
-    const authGateway = new AuthenticationGateway();
+    const authGateway = AuthenticationGateway.create();
     const loginUserUseCase = new UserLogger(authGateway);
     return new LoginApplication(loginUserUseCase);
   }

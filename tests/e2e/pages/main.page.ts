@@ -2,7 +2,7 @@ import { WebDriverWrapper } from '../selenium/web-driver.wrapper';
 import { By } from 'selenium-webdriver';
 
 export class MainPage {
-  public static readonly MAIN_PAGE_SELECTOR = '[data-test=main-page-container]';
+  public static readonly MAIN_PAGE_SELECTOR = '[data-testid=main-page-container]';
 
   constructor(private driver: WebDriverWrapper) {}
 

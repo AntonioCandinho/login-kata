@@ -24,7 +24,12 @@ export function Login({ loginUseCase, onLogIn }: LoginProps): React.ReactElement
       setFormState({ ...formState, loginError: 'Username and password are mandatory' });
       return;
     }
-    await loginUseCase.login(username, password);
+    try {
+      await loginUseCase.login(username, password);
+    } catch (e) {
+      setFormState({ ...formState, loginError: 'Server error, unable to obtain access token' });
+      return;
+    }
     onLogIn();
   };
 
