@@ -1,10 +1,16 @@
 import * as React from 'react';
 import Logo from '../images/logo.png';
 import styled from 'styled-components';
+import { Logout } from '../logout/Logout';
 
-const MainContainer = styled.div`
-  font-family: arial, sans-serif;
+const MainPageContainer = styled.div`
+  font-family: sans-serif;
   color: rgba(0, 0, 0, 0.75);
+  display: flex;
+  justify-content: flex-end;
+`;
+
+const MainContent = styled.div`
   position: absolute;
   margin: 0;
   top: 40%;
@@ -27,9 +33,12 @@ const MainLogoImage = styled.img`
 `;
 
 export const Main = (): React.ReactElement => (
-  <MainContainer data-testid="main-page-container">
-    <MainLogoContainer>
-      <MainLogoImage src={Logo}></MainLogoImage>
-    </MainLogoContainer>
-  </MainContainer>
+  <MainPageContainer data-testid="main-page-container">
+    <Logout />
+    <MainContent>
+      <MainLogoContainer>
+        <MainLogoImage src={Logo}></MainLogoImage>
+      </MainLogoContainer>
+    </MainContent>
+  </MainPageContainer>
 );
