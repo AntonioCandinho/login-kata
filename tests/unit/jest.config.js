@@ -6,6 +6,6 @@ module.exports = {
   setupFilesAfterEnv: ['<rootDir>/setupTests.ts'],
   transform: {
     '^.+\\.[jt]sx?$': 'ts-jest',
-    '^.+\\.svg$': '<rootDir>/svgTransform.js',
+    '^.+\\.png$': '<rootDir>/pngTransform.js',
   },
 };
