@@ -1,4 +1,4 @@
-import { GREY, RED, PRIMARY_BLUE } from '../../styles/colors';
+import { GREY, RED, PRIMARY_BLUE } from '../../../styles/colors';
 import styled from 'styled-components';
 
 export const LoginFormInput = styled.input`

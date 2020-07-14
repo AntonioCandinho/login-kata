@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Login, LoginProps } from './components/Login';
 import { UserLogger, LoginUseCase } from './usecases/LoginUseCase';
-import { AuthenticationGateway } from './gateways/AuthenticationGateway';
+import { AuthenticationGateway } from '../../gateways/AuthenticationGateway';
 
 export class LoginApplication {
   public constructor(private loginUseCase: LoginUseCase) {}

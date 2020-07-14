@@ -1,5 +1,5 @@
 import nodeFetch from 'node-fetch';
-import { AuthenticationGateway } from '../../../../src/login/gateways/AuthenticationGateway';
+import { AuthenticationGateway } from '../../../src/gateways/AuthenticationGateway';
 
 const SERVER_URL = 'http://localhost:3000';
 

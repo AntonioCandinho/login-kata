@@ -1,5 +1,5 @@
 import * as React from 'react';
-import LoginLogo from '../../images/logo.png';
+import LoginLogo from '../../../images/logo.png';
 import { LoginUseCase } from '../usecases/LoginUseCase';
 import {
   LoginButton,

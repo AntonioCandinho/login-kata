@@ -1,7 +1,7 @@
 import { fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
 import * as React from 'react';
-import { Login } from '../../../src/login/components/Login';
-import { LoginUseCase } from '../../../src/login/usecases/LoginUseCase';
+import { Login } from '../../../../../src/apps/login/components/Login';
+import { LoginUseCase } from '../../../../../src/apps/login/usecases/LoginUseCase';
 
 describe('Login component', () => {
   const randomUsername = `any-username-${Math.random()}`;
