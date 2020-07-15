@@ -4,7 +4,7 @@ import {
   AuthTokenRevoker,
 } from '../gateways/AuthenticationGateway';
 import { AccessTokenRepository } from '../repositories/AccessTokenRepository';
-import { InMemoryAccessTokenRepository } from '../repositories/InMemoryAccessTokenRepository';
+import { LocalStorageAccessTokenRepository } from '../repositories/LocalStorageAccessTokenRepository';
 import { LoginUseCase, UserLogger } from '../usecases/LoginUseCase';
 import { LogoutUseCase, LogoutUserUseCase } from '../usecases/LogoutUseCase';
 import { LoginServiceLocator } from './LoginServiceLocator';
@@ -18,7 +18,7 @@ export class LoginServiceLocatorBuilder {
   ) {}
 
   public static of(): LoginServiceLocatorBuilder {
-    const repository = new InMemoryAccessTokenRepository();
+    const repository = LocalStorageAccessTokenRepository.of();
     const authGateway = AuthenticationGateway.create();
     const loginUseCase = new UserLogger(authGateway, repository);
     const logoutUseCase = new LogoutUserUseCase(authGateway, repository);

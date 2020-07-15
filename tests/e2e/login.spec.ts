@@ -39,6 +39,14 @@ describe('Login e2e cases', () => {
 
     it('should be redirected to the main page', expectMainPage);
 
+    describe('when the user does a refresh', () => {
+      beforeEach(async () => {
+        await driver.get(await driver.getCurrentUrl());
+      });
+
+      it('should be logged in', expectMainPage);
+    });
+
     describe('and when it does a logout', () => {
       beforeAll(async () => {
         await mainPage.logout();
