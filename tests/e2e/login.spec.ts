@@ -6,10 +6,20 @@ import { WebDriverWrapper } from './selenium/web-driver.wrapper';
 import { MainPage } from './pages/main.page';
 import { ConfigLoader } from './config/config-loader';
 
-describe('e2e/app.spec.ts', () => {
+describe('Login e2e cases', () => {
   let driver: WebDriverWrapper;
   let loginPage: LoginPage;
   let mainPage: MainPage;
+
+  const expectLoginPage = async () => {
+    expect(await loginPage.isLoginPage()).toEqual(true);
+    expect(await mainPage.isMainPageInvisible()).toEqual(true);
+  };
+
+  const expectMainPage = async () => {
+    expect(await mainPage.isMainPage()).toEqual(true);
+    expect(await loginPage.loginNotVisible()).toEqual(true);
+  };
 
   beforeAll(async () => {
     driver = await new WebDriverFactory().createInsecureChrome();
@@ -19,20 +29,22 @@ describe('e2e/app.spec.ts', () => {
 
   afterAll(async () => driver.quit());
 
-  it('the user should start at the login page', async () => {
-    expect(await loginPage.isLoginPage()).toEqual(true);
-    expect(await mainPage.isMainPageInvisible()).toEqual(true);
-  });
+  it('the user should start at the login page', expectLoginPage);
 
-  describe('when the user does a successful login', () => {
-    beforeEach(async () => {
+  describe('when the user does a login', () => {
+    beforeAll(async () => {
       const { username, password } = (await ConfigLoader.getConfig()).CREDENTIALS;
       await loginPage.login(username, password);
     });
 
-    it('should redirect users to the main page', async () => {
-      expect(await mainPage.isMainPage()).toEqual(true);
-      expect(await loginPage.loginNotVisible()).toEqual(true);
+    it('should be redirected to the main page', expectMainPage);
+
+    describe('and when it does a logout', () => {
+      beforeAll(async () => {
+        await mainPage.logout();
+      });
+
+      it('should be redirected back to the login page', expectLoginPage);
     });
   });
 });

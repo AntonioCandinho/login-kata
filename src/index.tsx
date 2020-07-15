@@ -1,7 +1,11 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
-import { RouterApplication } from './router/RouterApplication';
+import { LoginServiceLocatorBuilder } from './servicelocators/LoginServiceLocatorBuilder';
+import { Router } from './presenters/Router';
 
-const Router = RouterApplication.createDefault().getRouterComponent();
+const loginServiceLocator = LoginServiceLocatorBuilder.of().build();
 
-ReactDOM.render(<Router />, document.getElementById('app'));
+ReactDOM.render(
+  <Router loginServiceLocator={loginServiceLocator} />,
+  document.getElementById('app')
+);

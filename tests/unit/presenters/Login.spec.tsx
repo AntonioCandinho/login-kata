@@ -1,7 +1,8 @@
 import { fireEvent, render, RenderResult, waitFor } from '@testing-library/react';
 import * as React from 'react';
-import { Login } from '../../../src/login/components/Login';
-import { LoginUseCase } from '../../../src/login/usecases/LoginUseCase';
+import { Login } from '../../../src/presenters/Login';
+import { LoginServiceLocator } from '../../../src/servicelocators/LoginServiceLocator';
+import { LoginUseCase } from '../../../src/usecases/LoginUseCase';
 
 describe('Login component', () => {
   const randomUsername = `any-username-${Math.random()}`;
@@ -14,7 +15,13 @@ describe('Login component', () => {
   beforeEach(() => {
     onLogIn = jest.fn();
     loginUseCase = { login: jest.fn() };
-    loginComponent = render(<Login loginUseCase={loginUseCase} onLogIn={onLogIn} />);
+    const locator: LoginServiceLocator = {
+      loginUseCase,
+      accessTokenRepository: null,
+      authorizationGateway: null,
+      logoutUseCase: null,
+    };
+    loginComponent = render(<Login loginServiceLocator={locator} onLogIn={onLogIn} />);
   });
 
   const login = (username: string, password: string) => {
