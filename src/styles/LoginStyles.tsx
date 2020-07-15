@@ -1,5 +1,5 @@
-import { GREY, RED, PRIMARY_BLUE } from '../../../styles/colors';
 import styled from 'styled-components';
+import { GREY, PRIMARY_BLUE, RED } from './colors';
 
 export const LoginFormInput = styled.input`
   padding: 0.5em;

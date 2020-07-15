@@ -1,6 +1,6 @@
 import log from 'roarr';
-import { AuthTokenRevoker } from '../../../gateways/AuthenticationGateway';
-import { AccessTokenRepository } from '../../../repositories/AccessTokenRepository';
+import { AuthTokenRevoker } from '../gateways/AuthenticationGateway';
+import { AccessTokenRepository } from '../repositories/AccessTokenRepository';
 
 export interface LogoutUseCase {
   logout(): Promise<void>;

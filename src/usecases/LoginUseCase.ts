@@ -1,5 +1,5 @@
-import { AuthTokenRetriever } from '../../../gateways/AuthenticationGateway';
-import { AccessTokenRepository } from '../../../repositories/AccessTokenRepository';
+import { AuthTokenRetriever } from '../gateways/AuthenticationGateway';
+import { AccessTokenRepository } from '../repositories/AccessTokenRepository';
 
 export interface LoginUseCase {
   login(username: string, password: string): Promise<void>;

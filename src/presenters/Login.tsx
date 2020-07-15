@@ -1,21 +1,21 @@
 import * as React from 'react';
-import LoginLogo from '../../../images/logo.png';
-import { LoginUseCase } from '../usecases/LoginUseCase';
+import LoginLogo from '../images/logo.png';
+import { LoginServiceLocator } from '../servicelocators/LoginServiceLocator';
 import {
   LoginButton,
+  LoginError,
   LoginForm,
   LoginFormInput,
   LoginLogoContainer,
   LoginLogoImg,
-  LoginError,
-} from './LoginStyles';
+} from '../styles/LoginStyles';
 
 export interface LoginProps {
+  loginServiceLocator: LoginServiceLocator;
   onLogIn: () => void;
-  loginUseCase: LoginUseCase;
 }
 
-export function Login({ loginUseCase, onLogIn }: LoginProps): React.ReactElement {
+export function Login({ loginServiceLocator, onLogIn }: LoginProps): React.ReactElement {
   const [formState, setFormState] = React.useState({ username: '', password: '', loginError: '' });
 
   const onUsernameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -34,7 +34,7 @@ export function Login({ loginUseCase, onLogIn }: LoginProps): React.ReactElement
       return;
     }
     try {
-      await loginUseCase.login(username, password);
+      await loginServiceLocator.loginUseCase.login(username, password);
     } catch (e) {
       setFormState({ ...formState, loginError: 'Server error, unable to obtain access token' });
       return;

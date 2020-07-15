@@ -1,5 +1,5 @@
-import { PRIMARY_BLUE } from '../../../styles/colors';
 import styled from 'styled-components';
+import { PRIMARY_BLUE } from './colors';
 
 export const LogoutButton = styled.a`
   background-color: ${PRIMARY_BLUE};

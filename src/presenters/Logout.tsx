@@ -1,15 +1,16 @@
 import * as React from 'react';
-import { LogoutButton } from './LogoutStyles';
-import { LogoutUseCase } from '../usecases/LogoutUseCase';
+import { LogoutButton } from '../styles/LogoutStyles';
+import { LoginServiceLocator } from '../servicelocators/LoginServiceLocator';
 
 export interface LogoutProps {
-  logoutUseCase: LogoutUseCase;
+  loginServiceLocator: LoginServiceLocator;
   onLogOut: () => void;
 }
+
 export function Logout(props: LogoutProps): React.ReactElement {
-  const { logoutUseCase, onLogOut } = props;
+  const { loginServiceLocator, onLogOut } = props;
   const onClick = async () => {
-    await logoutUseCase.logout();
+    await loginServiceLocator.logoutUseCase.logout();
     onLogOut();
   };
   return (

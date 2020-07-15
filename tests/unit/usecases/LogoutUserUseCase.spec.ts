@@ -1,9 +1,6 @@
-import { AuthTokenRevoker } from '../../../../../src/gateways/AuthenticationGateway';
-import { AccessTokenRepository } from '../../../../../src/repositories/AccessTokenRepository';
-import {
-  LogoutUseCase,
-  LogoutUserUseCase,
-} from '../../../../../src/apps/logout/usecases/LogoutUseCase';
+import { AuthTokenRevoker } from '../../../src/gateways/AuthenticationGateway';
+import { AccessTokenRepository } from '../../../src/repositories/AccessTokenRepository';
+import { LogoutUseCase, LogoutUserUseCase } from '../../../src/usecases/LogoutUseCase';
 
 describe('LogoutUserUseCase', () => {
   let tokenRevokerMock: AuthTokenRevoker & { revokeAuthToken: jest.Mock<Promise<void>, [string]> };
