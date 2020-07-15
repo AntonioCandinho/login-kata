@@ -4,7 +4,11 @@ export interface AuthTokenRetriever {
   getAuthToken(username: string, password: string): Promise<string>;
 }
 
-export class AuthenticationGateway implements AuthTokenRetriever {
+export interface AuthTokenRevoker {
+  revokeAuthToken(token: string): Promise<void>;
+}
+
+export class AuthenticationGateway implements AuthTokenRetriever, AuthTokenRevoker {
   public constructor(private tokenEndpoint: string, private fetcher: typeof fetch) {}
 
   public static create(): AuthenticationGateway {
@@ -25,5 +29,9 @@ export class AuthenticationGateway implements AuthTokenRetriever {
     }
     const data = await response.json();
     return data.access_token;
+  }
+
+  public async revokeAuthToken(): Promise<void> {
+    throw Error('Not implemented');
   }
 }

@@ -32,7 +32,7 @@ describe('Login e2e cases', () => {
   it('the user should start at the login page', expectLoginPage);
 
   describe('when the user does a login', () => {
-    beforeEach(async () => {
+    beforeAll(async () => {
       const { username, password } = (await ConfigLoader.getConfig()).CREDENTIALS;
       await loginPage.login(username, password);
     });
@@ -40,7 +40,7 @@ describe('Login e2e cases', () => {
     it('should be redirected to the main page', expectMainPage);
 
     describe('and when it does a logout', () => {
-      beforeEach(async () => {
+      beforeAll(async () => {
         await mainPage.logout();
       });
 
