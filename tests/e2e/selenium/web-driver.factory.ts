@@ -5,7 +5,7 @@ import { WebDriverWrapper } from './web-driver.wrapper';
 export class WebDriverFactory {
   async createInsecureChrome(): Promise<WebDriverWrapper> {
     const options = new ChromeOptions()
-      //.headless()
+      .headless()
       .windowSize({ width: 1366, height: 768 })
       .addArguments(
         '--no-sandbox',
