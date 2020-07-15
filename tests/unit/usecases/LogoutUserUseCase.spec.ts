@@ -13,7 +13,12 @@ describe('LogoutUserUseCase', () => {
 
   beforeEach(() => {
     tokenRevokerMock = { revokeAuthToken: jest.fn() };
-    accessTokenRepositoryMock = { get: jest.fn(), delete: jest.fn(), save: jest.fn() };
+    accessTokenRepositoryMock = {
+      get: jest.fn(),
+      isStored: jest.fn(),
+      delete: jest.fn(),
+      save: jest.fn(),
+    };
     accessTokenRepositoryMock.get.mockImplementation(() => {
       throw Error('No token');
     });

@@ -8,7 +8,9 @@ export interface RouterProps {
 }
 
 export const Router = (props: RouterProps): React.ReactElement => {
-  const [isLoggedIn, setLoggedIn] = React.useState(false);
+  // eslint-disable-next-line
+  const defaultState = props.loginServiceLocator.accessTokenRepository.isStored();
+  const [isLoggedIn, setLoggedIn] = React.useState(defaultState);
   return isLoggedIn ? (
     <Main {...props} onLogOut={() => setLoggedIn(false)} />
   ) : (
