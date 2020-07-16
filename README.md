@@ -12,16 +12,16 @@ logged in, we should show him a button to close the user session.**
 
 ## How to run?
 
-[Node](https://nodejs.org/en/) 14 was used for the development of this project so it is the recommended Node version to use, Node versions greater and including 8 should also be able to run this project, though. 
+[Node](https://nodejs.org/en/) 14 was used for the development of this project so it is the recommended Node version to use, Node versions greater and including **8** should also be able to run this project, though. 
 
 For running the project you can do: 
 
 ``` sh
 npm install
-npm run server
+npm run serve
 ```
 
-This commands will start a development web server in the port *3000*, it will serve the static Html and js files that make the web page and will also act as a mock authentication API that will allow login with any credentials. Once the server is up and running you can access it in the following url: http://localhost:3000
+This commands will download and install the dependencies need in order to run the project and they will start a development web server in the port *3000*. The last command will serve the static HTML and Js files that make the web page and will also act as a mock authentication API that will allow login with any credentials. Once the server is up and running you can access it in the following url: http://localhost:3000. 
 
 *Note: Sometimes webpack will take a little bit to compile so be sure you see a Compiled successfully message before trying to access the server*
 
@@ -58,36 +58,40 @@ The files that stand alone: `index.html`, `index.tsx` are the entry point for th
 
 This web page aims to be fully test covered. For that three different kinds of tests are used: 
 
-**Unit tests** will test modules in isolation, they require no dependencies and they can be run with:
+* **Unit tests** will test modules in isolation, they require no dependencies and they can be run with:
 
 ``` sh
 npm run test:unit
 ```
 
-**Integration tests** will test modules integration with different components. They are more expensive in time to run and maintain than unit tests and require a running development web server in the port 3000 (`npm run serve`). Run them with:
+* **Integration tests** will test modules integration with different components. They are more expensive in time to run and maintain than unit tests and require a running development web server in the port 3000 (`npm run serve`). Run them with:
 
 ``` sh
 npm run test:integration
 ```
 
-**E2E tests** these are the most expensive and for that reason the less common, these tests will
+* **E2E tests** these are the most expensive and for that reason the less common, these tests will
 test the page like and end-user would, clicking, scrolling, writing, etc. They need a running dev server (`npm run serve`). The following command should run them:
 
 ``` sh
 npm run test:e2e
 ```
 
-[Jest](https://jestjs.io) is the test framework that supports all of them. With Jest, (Selenium)[https://www.selenium.dev/] powers the e2e tests.
+[Jest](https://jestjs.io) is the test framework that supports all of them. Toghether with Jest, [Selenium](https://www.selenium.dev/) powers the e2e tests.
 
 Because of the heterogeneous nature of the test system, there is not a tool that could give a complete coverage report of the system so none is used.
 
 
 ## Production build
 
-Although the development web server could be a very useful tool for quick development and demo it is **not suitable for a production environment**. For that a production build can be done issuing: 
+Although the development web server could be a very useful tool for quick development and demo, it is **not suitable for a production environment**. For that, a production build can be done issuing: 
 
 ``` sh
 npm run build
 ```
 
 This command will generate some static files in the **dist** directory these files could be served with your preferred HTTP server.
+
+## Security considerations
+
+The access token is stored using the [Web Storage API](https://www.w3.org/TR/webstorage/), this is not a great practice, because an attacker that could run JavaScript on the page (XSS) will have access to the token. You can find more information about that [here](https://auth0.com/docs/tokens/concepts/token-storage#single-page-app-scenarios). Although other and safer solutions do exist they will require more infrastructure work and are less interesting in terms of code quality so I've decided to go with the former solution.
